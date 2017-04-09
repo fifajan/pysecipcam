@@ -4,9 +4,15 @@ from time import sleep
 
 LENGTH_SECONDS = 10
 
+USER = 'XXX'
+PWD = 'YYY'
+
+RTSP_URL = 'rtsp://IP_ADDR:554/profile2/'
+
+OUT_FILE = 'cam999.mov'
+
 COMMAND_BASE = ('openRTSP -q -D 1 -B 10000000 -b 10000000 -Q -F cam1112'
-                ' -d 10 -t -u admin 123456 rtsp://IP_ADDR:554/profile2/'
-                ' > cam999.mov')
+                ' -d 10 -t -u %s %s %s > %s' % (USER, PWD, RTSP_URL, OUT_FILE))
 
 def date_to_str(date):
     return '_'.join(str(date).split(

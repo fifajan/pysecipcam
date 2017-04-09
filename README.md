@@ -19,3 +19,6 @@ Planned features:
 12. Break recognition (open cv)
 13. Break in email/sms sending
 14. Speaker loud alert
+15. Docker redy-to-use image
+16. Multiple cameras (IP/web) support
+17. Video result (multi cam) composition support

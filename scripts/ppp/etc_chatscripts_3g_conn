@@ -1,0 +1,26 @@
+ABORT                   "ERROR"
+ABORT                   "NO ANSWER"
+ABORT                   "BUSY"
+ABORT                   "NO CARRIER"
+ABORT                   "NO DIALTONE"
+
+REPORT                  "CON"
+
+""                      "ATZ"
+
+"OK"                    "AT E0 V1 &D2 &C1 &S0 S0=0"
+"OK"                    "AT+IFC=2,2;+CVHU=1"
+# ^ эти 2 строчки появились не от хорошей жизни,
+# на других телефонах можно обойтись без них.
+# вообще тут могут возникнуть проблемы с разными телевонами
+# подробнее читай тут: http://www.linux.org.ru/jump-message.jsp?msgid=1799852
+
+"OK"                    'AT+CGDCONT=1,"IP","www.umc.ua"'
+# тут должна быть точка доступа для твоего провайдера
+#"OK"                   'AT+CGDCONT=1,"IP","Internet"'
+
+"OK"                    'ATD*99#'
+# тут может быть вот это: 'ATD*99***1#' , зависит от телевона
+
+TIMEOUT                 15
+"CON"                   ""

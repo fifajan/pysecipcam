@@ -1,0 +1,36 @@
+#! /bin/sh
+
+function call()
+{
+    /usr/sbin/pppd nodetach call 3g_conn # >/dev/null 2>&1
+    ret=$?
+    return $ret
+
+}
+
+function connect ()
+{
+    echo -e "\e[1;33m** Dialing Provider (3G Conn) **\e[0m"
+    call
+    ret=$?
+        return $ret
+}
+
+while true; do
+{
+    connect
+    ret=$?
+
+    if [ $ret -eq 5 ]; then
+    {
+        echo -e "\e[1;31m** Terminated on user interrupt **\e[0m"
+        break
+    }
+    fi
+
+    # Deinitialization script
+    /usr/sbin/pppd nodetach call deinitilize >/dev/null 2>&1
+
+    sleep 2
+}  
+done

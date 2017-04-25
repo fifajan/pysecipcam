@@ -1,0 +1,29 @@
+ttyACM0
+57600
+#modem
+#mru 296
+replacedefaultroute
+noauth
+#debug
+defaultroute
+usepeerdns
+#updetach
+#persist
+noipdefault
+local
+lock
+#nopcomp
+#noaccomp
+#nodeflate
+#nomagic
+#lcp-max-configure 20
+#lcp-max-failure 300
+#lcp-echo-interval 1
+novj
+novjccomp
+#nobsdcomp
+default-asyncmap
+#ipcp-accept-local
+#ipcp-accept-remote
+user ""
+connect "/usr/sbin/chat -vsf /etc/chatscripts/3g_conn

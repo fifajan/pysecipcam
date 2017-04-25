@@ -1,0 +1,4 @@
+-rw-r--r-- 1 root dialout 375 2017-02-17 15:52 /etc/ppp/peers/3g_conn
+-rw-r--r-- 1 root dialout 238 2017-02-17 14:37 /etc/chatscripts/3g_conn
+-rwsr-xr-- 1 root dialout 255K 2017-02-12 19:34 /usr/sbin/3g_conn
+-rw-r-xr-- 1 root dialout 560 2017-02-17 15:51 /bin/3g_conn

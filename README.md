@@ -22,4 +22,4 @@ Planned features:
 15. Docker redy-to-use image
 16. Multiple cameras (IP/web) support
 17. Video result (multi cam) composition support
-18. Reature rich yet simple mobile app
+18. Feature rich yet simple mobile app

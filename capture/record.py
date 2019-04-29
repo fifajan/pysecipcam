@@ -1,18 +1,24 @@
 from datetime import datetime, timedelta
+import subprocess as sp
 from time import sleep
 
 
 LENGTH_SECONDS = 10
 
-USER = 'XXX'
-PWD = 'YYY'
+USER = 'USER'
+PWD = 'PASS'
 
-RTSP_URL = 'rtsp://IP_ADDR:554/profile2/'
+RTSP_URL = 'rtsp://192.168.0.AB:554/profileX/'
 
 OUT_FILE = 'cam999.mov'
 
-COMMAND_BASE = ('openRTSP -q -D 1 -B 10000000 -b 10000000 -Q -F cam1112'
-                ' -d 10 -t -u %s %s %s > %s' % (USER, PWD, RTSP_URL, OUT_FILE))
+# this CLI command works well with Gzr sec camera:
+#
+# openRTSP -q -D 1 -B 10000000 -b 10000000 -Q -d 10 -t -u <S_LOGIN> 
+# <S_PASSWORD> rtsp://192.168.0.ABC:554/profileX/ > vid123.mov
+
+COMMAND_BASE = ('openRTSP -Q '
+                ' -d 10 -t -u %s %s %s' % (USER, PWD, RTSP_URL))
 
 def date_to_str(date):
     return '_'.join(str(date).split(
@@ -26,6 +32,13 @@ def record():
 
     filename = start_str + '___' + end_str
     print(filename)
+    exec_cmd = COMMAND_BASE.split()[0]
+    exec_cmd_args = COMMAND_BASE.split()[1:]
+    exec_cmd_args[-1] += filename
+
+    # execution:
+    sp.call([exec_cmd] + exec_cmd_args + ['> %s' % (filename + OUT_FILE)])
+
     sleep(2)
 
 if __name__ == '__main__':

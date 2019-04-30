@@ -10,15 +10,19 @@ PWD = 'PASS'
 
 RTSP_URL = 'rtsp://192.168.0.AB:554/profileX/'
 
-OUT_FILE = 'cam999.mov'
+OUT_FILE = '_cam999.mov'
 
 # this CLI command works well with Gzr sec camera:
 #
 # openRTSP -q -D 1 -B 10000000 -b 10000000 -Q -d 10 -t -u <S_LOGIN> 
 # <S_PASSWORD> rtsp://192.168.0.ABC:554/profileX/ > vid123.mov
 
-COMMAND_BASE = ('openRTSP -Q '
-                ' -d 10 -t -u %s %s %s' % (USER, PWD, RTSP_URL))
+COMMAND_BASE = ('openRTSP '
+                '-q -D 1 -B 10000000 -b 10000000 -Q -d 10 -t'
+                ' -u %s %s %s' % (USER, PWD, RTSP_URL))
+
+# video data emulation, this outputs 1mb of rand data:
+COMMAND_DASE = 'head -c 1M < /dev/urandom'
 
 def date_to_str(date):
     return '_'.join(str(date).split(
@@ -34,10 +38,11 @@ def record():
     print(filename)
     exec_cmd = COMMAND_BASE.split()[0]
     exec_cmd_args = COMMAND_BASE.split()[1:]
-    exec_cmd_args[-1] += filename
+    exec_cmd_args[-1] += filename + OUT_FILE
 
     # execution:
-    sp.call([exec_cmd] + exec_cmd_args + ['> %s' % (filename + OUT_FILE)])
+    with open(filename, 'wb') as out_fl:
+        sp.call([exec_cmd] + exec_cmd_args, stdout=out_fl)
 
     sleep(2)
 
